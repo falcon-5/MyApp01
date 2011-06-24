@@ -29,12 +29,12 @@ public class MainActivity extends Activity
     	{
     		String strKeyword = "";
     		EditText edit = (EditText)findViewById(R.id.editKeyword);
-    		strKeyword = edit.getText().toString() + " ワンピース";
+    		strKeyword = edit.getText().toString();
     		if(strKeyword.trim().length() > 0)
     		{
     			//結果表示画面を起動
-    			Intent intent = new Intent(this, SearchActivity.class);
-    			intent.putExtra("keyword", strKeyword);
+    			Intent intent = new Intent(this, MyTabActivity.class);
+    			intent.putExtra("keyword", strKeyword + " ワンピース");
     			startActivity(intent);
     		}
     	}

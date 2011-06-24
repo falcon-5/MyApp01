@@ -14,8 +14,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="SearchActivity"
-                  android:label="@string/app_name"></activity>
+        <activity android:name="MyTabActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name="ASearchActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name="RSearchActivity"
+                  android:label="@string/app_name">
+        </activity>
+        <activity android:name="YSearchActivity"
+                  android:label="@string/app_name">
+        </activity>
 
     </application>
 </manifest>
