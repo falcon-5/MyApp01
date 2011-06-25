@@ -43,6 +43,7 @@ public class RSearchActivity extends ListActivity
 		TextView txt = (TextView)findViewById(R.id.txtCount);
 		if(this.atfirst)
 		{
+			this.atfirst = false;
 			mRakutenTask = new RakutenTask(this, list, txt);
 			mRakutenTask.execute(Uri.encode(mKeyword, "1"));
 		}
@@ -76,8 +77,6 @@ public class RSearchActivity extends ListActivity
 		RItem item = (RItem)l.getItemAtPosition(position);
 		if(item != null)
 		{
-			this.atfirst = false;
-
 			String url = item.getAffiliateUrl();
 			if(url.trim().length() > 0)
 			{

@@ -43,6 +43,7 @@ public class YSearchActivity extends ListActivity
 		TextView txt = (TextView)findViewById(R.id.txtCount);
 		if(this.atfirst)
 		{
+			this.atfirst = false;
 			mYahooTask = new YahooTask(this, list, txt);
 			mYahooTask.execute(Uri.encode(mKeyword, "1"));
 		}
@@ -76,8 +77,6 @@ public class YSearchActivity extends ListActivity
 		YItem item = (YItem)l.getItemAtPosition(position);
 		if(item != null)
 		{
-			this.atfirst = false;
-
 			String url = item.getLink();
 			if(url.trim().length() > 0)
 			{

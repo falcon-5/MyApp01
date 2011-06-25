@@ -32,7 +32,6 @@ public class AmazonTask extends AsyncTask<String, Void, Integer>
 	private static final String P_RES_GROUP		 = "ItemAttributes,Images";
 	private static final String P_SEARCH_IDX	 = "All";
 	private static final String P_ASSOCIATE		 = "falcon50a-22";
-	private static final String P_PAGE			 = "1";
 
 	private Context mContext;
 	private ProgressDialog mDialog = null;
@@ -71,7 +70,7 @@ public class AmazonTask extends AsyncTask<String, Void, Integer>
 		params.put("ResponseGroup", P_RES_GROUP);
 		params.put("SearchIndex", P_SEARCH_IDX);
 		params.put("AssociateTag", P_ASSOCIATE);
-		params.put("ItemPage", P_PAGE);
+		params.put("ItemPage", arg0[1]);
 //		SignedRequestsHelper srh = new SignedRequestsHelper();
 		SignedRequestsHelper srh = null;
 		try{ srh = new SignedRequestsHelper(); }catch(Exception e){};

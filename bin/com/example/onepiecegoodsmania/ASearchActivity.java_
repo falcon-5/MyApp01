@@ -9,7 +9,6 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.async.AmazonTask;
 import com.example.data.AItem;
@@ -20,16 +19,14 @@ public class ASearchActivity extends ListActivity
 {
 	private AmazonTask mAmazonTask = null;
 	private String mKeyword;
-	private int mPages = 1;
 
-	// ListViewのフッタ
+	/** ListViewのフッタ */
 	private View mFooter;
-	/*
-	// 追加読み込みの最大回数
+	/** 追加読み込みの最大回数 */
 	private final static int MAX_COUNT = 5;
-	// 追加読み込み回数
+	/** 追加読み込み回数 */
 	private int mCount = 0;
-*/
+
 //	private int _position = 0;			//ListViewスクロール位置
 	/* 位置を記憶するより初回以外受信処理を行わせない方が良い感じ。。。 */
 	private boolean atfirst = true;		//初回かどうか
@@ -39,11 +36,11 @@ public class ASearchActivity extends ListActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.result_list);
 
-		//Listを最下部までスクロールした時の処理
-		ListView list = getListView();
-		list.setOnScrollListener(this);
-		list.addFooterView(getFooter());
-//		list.setAdapter(getListAdapter());
+		//Listを最下部までスクロールした時プログレッシブを表示
+		ListView listView = getListView();
+		listView.addFooterView(getFooter());
+		listView.setAdapter(getListAdapter());
+		listView.setOnScrollListener(this);
 
 		Bundle extras = getIntent().getExtras();
 		if(extras != null)
@@ -65,9 +62,8 @@ public class ASearchActivity extends ListActivity
 //		if(this._position == 0)
 		if(this.atfirst)
 		{
-			this.atfirst = false;
 			mAmazonTask = new AmazonTask(this, list, txt);
-			mAmazonTask.execute(mKeyword, String.valueOf(mPages));
+			mAmazonTask.execute(mKeyword, "1");
 		}
 /*
 		else
@@ -108,6 +104,7 @@ public class ASearchActivity extends ListActivity
 		{
 			//ListViewの表示位置を記憶
 //			this._position = l.getFirstVisiblePosition();
+			this.atfirst = false;
 
 			String url = item.getDetailPageUrl();
 			if(url.trim().length() > 0)
@@ -118,6 +115,7 @@ public class ASearchActivity extends ListActivity
 			}
 		}
 	}
+
 	private View getFooter()
 	{
 		if(mFooter == null)
@@ -133,12 +131,10 @@ public class ASearchActivity extends ListActivity
 	{
 		if(totalItemCount == firstVisibleItem + visibleItemCount)
 		{
-			Toast.makeText(this, "List is End", Toast.LENGTH_LONG).show();
-//			additionalReading();
+			additionalReading();
 		}
 	}
 
-/*
 	private void additionalReading()
 	{
 		//読み込み回数が最大値以上ならスキップ。フッタを消す
@@ -162,7 +158,7 @@ public class ASearchActivity extends ListActivity
 	{
 		getListView().removeFooterView(getFooter());
 	}
-*/
+
 	@Override
 	public void onScrollStateChanged(AbsListView view, int scrollState)
 	{
